@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration Success</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<!-- MARKETING BAR-->
+<div class="container">
+    <div class="header">
+        <div class="ui-widget-header bg-blue " role="heading" align="right">
+            <a class="header">
+                <a href="https://www.instagram.com" target="_blank" style="font-size: 13px">Instagram &nbsp;</a>
+            </a>
+            <a class="header">
+                <a href="https://www.youtube.com" target="_blank" style="font-size: 13px"> &nbsp; Youtube</a>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container text-center">
+    <h3>You have signed up successfully!</h3>
+    <h4><a th:href="@{/login}">Click here to Login</a></h4>
+</div>
+<!-- FOOTER -->
+<footer style="background-color: rgba(0,4,12,0.8)">
+    <p align="center" style="color: aliceblue">2023 Kubra Sisman</p>
+</footer>
+</body>
+</html>

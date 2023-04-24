@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Update Task</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <form action="#" th:action="@{/updateTask}" th:object="${userTask}"
+          method="post" style="max-width: 600px; margin: 0 auto;">
+
+        <div class="form-group">
+            <div class="col-8">
+                <input hidden type="text" th:field="*{id}" class="form-control" readonly="readonly"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-4 col-form-label">Task Name: </label>
+            <div class="col-8">
+                <input type="text" th:field="*{taskName}" class="form-control" readonly="readonly"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-4 col-form-label">Task Explanation: </label>
+            <div class="col-8">
+                <input type="text" th:field="*{taskExplanation}" class="form-control" readonly="readonly"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-4 col-form-label">Task Statu: </label>
+            <select name="taskStatus">
+                <option th:each="taskStatus : ${T(com.project.hrtsx.Model.TaskStatusEnum).values()}"
+                        th:value="${taskStatus}" th:text="${taskStatus}"></option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label class="col-4 col-form-label">Deadline: </label>
+            <div class="col-8">
+                <input type="text" th:field="*{taskFinishDate}" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-8">
+                <input hidden type="text" th:field="*{user}" class="form-control"/>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+
+
+    </form>
+
+</div>
+
+</body>
+</html>
