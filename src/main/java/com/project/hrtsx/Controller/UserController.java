@@ -63,7 +63,15 @@ public class UserController {
         session.setAttribute("user", userModel);
         userModel.setLoggedIn(true);
         userService.updateUser(userModel);
-        List<Task> userTasks = taskService.findAll();
+
+        List<Task> userTasks = new ArrayList<>();
+
+        if ("ADMIN".equalsIgnoreCase(userModel.getUserRole())) {
+            userTasks = taskService.findAll();
+        } else {
+            userTasks = taskService.findTaskByUsers(userModel);
+        }
+
         model.addAttribute("userTask", userTasks);
         return "welcome";
     }
@@ -72,11 +80,12 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String listUsers(Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("user");
+
+        if (Objects.isNull(sessionUser)) return "homepage";
+
         if ("ADMIN".equalsIgnoreCase(sessionUser.getUserRole())) {
             List<User> listUsers = userService.allUsers();
             model.addAttribute("listUsers", listUsers);
-        } else if (sessionUser == null) {
-            return "homepage";
         } else {
             model.addAttribute("warning", "To see all user please have ADMIN role. ");
             model.addAttribute("listUsers", sessionUser);
@@ -131,9 +140,8 @@ public class UserController {
     public ModelAndView userDetail(@PathVariable("id") Long id, HttpServletRequest request, Model model) {
         User user = userService.findUserById(id);
         User sessionUser = (User) request.getSession().getAttribute("user");
-        User userModel = userService.findUserByEmail(sessionUser.getEmail());
         ModelAndView editView = new ModelAndView("userDetailForm");
-        if (Boolean.FALSE.equals(userModel.getLoggedIn())) {
+        if (Boolean.FALSE.equals(sessionUser.getLoggedIn())) {
             model.addAttribute("logout", true);
             return new ModelAndView("homepage");
         }

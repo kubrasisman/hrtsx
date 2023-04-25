@@ -35,7 +35,6 @@
                 <option th:each="taskStatus : ${T(com.project.hrtsx.Model.TaskStatusEnum).values()}"
                         th:value="${taskStatus}" th:text="${taskStatus}"></option>
             </select>
-
         </div>
         <div class="form-group">
             <label class="col-4 col-form-label">Deadline: </label>
@@ -43,13 +42,11 @@
                 <input type="text" th:field="*{taskFinishDate}" class="form-control"/>
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-8">
                 <input hidden type="text" th:field="*{user}" class="form-control"/>
             </div>
         </div>
-
         <button type="submit" class="btn btn-primary">Update</button>
 
 
